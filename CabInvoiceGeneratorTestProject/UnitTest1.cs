@@ -4,7 +4,7 @@ namespace CabInvoiceGeneratorTestProject
 {
     public class Tests
     {
-        InvoiceGenerator invoice;
+        InvoiceGenerator invoice = null;
 
         [Test]
         [TestCase(5, 5, 55, RideType.NORMAL)]
@@ -22,6 +22,16 @@ namespace CabInvoiceGeneratorTestProject
 
             //Assert
             Assert.AreEqual(actual, expected);
+        }
+        public void Given_Multiple_Rides_Return_TotalFare()
+        {
+            //Arrange
+            double expected = 88;
+            Ride[] rides = { new Ride(5, 2, RideType.NORMAL), new Ride(2, 3, RideType.PREMIUM) };
+            // Act
+            double actual = invoice.CalculateFare(rides);
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }

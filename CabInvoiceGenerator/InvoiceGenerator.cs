@@ -12,7 +12,7 @@ namespace CabInvoiceGenerator
         public readonly int COST_PER_KM;
         public readonly int COST_PER_MINUTE;
         public RideType rideType;
-
+       
         public InvoiceGenerator(RideType rideType)
         {
             this.rideType = rideType;
@@ -42,6 +42,23 @@ namespace CabInvoiceGenerator
                 totalFare = distance * COST_PER_KM + time * COST_PER_MINUTE;
             }
             return Math.Max(totalFare, MINIMUM_FARE);
+        }
+        // MUltiple Rides
+        /// /Method to calculated fare of multiple rides
+        //initializing array
+        public double CalculateFare(Ride[] rides)
+        {
+            double totalFare = 0;
+            foreach (Ride ride in rides)
+            {
+                totalFare += CalculateFare(ride);
+            }
+            return totalFare;
+        }
+
+        private double CalculateFare(Ride ride)
+        {
+            throw new NotImplementedException();
         }
     }
 }
